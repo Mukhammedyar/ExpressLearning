@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const postRoute = require("./router/post.router");
-const fileUpload = require("express-fileupload")
+const fileUpload = require("express-fileupload");
+const requestTime = require("./middlewares/requestTime");
 
 const PORT = 3000;
 const DATABASE_URL =
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("static"))
 app.use(fileUpload({}))
+app.use(requestTime)
 
 //routes
 app.use("/api/post", postRoute);
